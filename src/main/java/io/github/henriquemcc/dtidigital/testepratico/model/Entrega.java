@@ -2,6 +2,8 @@ package io.github.henriquemcc.dtidigital.testepratico.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Entrega {
     @Id
@@ -9,11 +11,11 @@ public class Entrega {
     public long id;
 
     @OneToMany
-    public Pedido pedido;
+    public List<Pedido> pedidos;
 
     @ManyToOne
     public Drone drone;
 
-    @OneToOne
+    @ManyToOne
     public Voo voo;
 }
