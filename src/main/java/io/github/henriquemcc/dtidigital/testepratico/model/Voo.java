@@ -1,13 +1,14 @@
 package io.github.henriquemcc.dtidigital.testepratico.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Voo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
+    @OneToMany
+    public List<Rota> rotas;
 }
