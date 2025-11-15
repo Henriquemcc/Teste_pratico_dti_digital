@@ -1,0 +1,11 @@
+services:
+  mysql:
+    image: 'mysql:9.1.0'
+    container_name: mysql-container-dtidigital
+    environment:
+      - 'MYSQL_DATABASE=encomendas'
+      - 'MYSQL_PASSWORD=password'
+      - 'MYSQL_ROOT_PASSWORD=verysecret'
+      - 'MYSQL_USER=dtidigital'
+    ports:
+      - '3306:3306'
