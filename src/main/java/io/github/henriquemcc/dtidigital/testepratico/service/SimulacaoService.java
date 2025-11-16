@@ -104,6 +104,7 @@ public class SimulacaoService {
                 Rota rota = new Rota();
                 rota.origem = anterior;
                 rota.destino = pedido.coordenada;
+                rotaRepository.save(rota);
                 rotas.add(rota);
                 anterior = pedido.coordenada;
             }
@@ -112,16 +113,12 @@ public class SimulacaoService {
             Rota rotaFinal = new Rota();
             rotaFinal.origem = anterior;
             rotaFinal.destino = deposito.localizacao;
+            rotaRepository.save(rotaFinal);
             rotas.add(rotaFinal);
 
             // Criando o voo
             Voo voo = new Voo();
-
-            // Relacionamento bidirecional correto
-            for (Rota r : rotas) {
-                r.voo = voo;         // chave estrangeira
-                voo.rotas.add(r);    // mantém a lista
-            }
+            voo.rotas.addAll(rotas);
 
             entrega.voo = voo;
             voos.add(voo);
