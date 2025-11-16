@@ -42,8 +42,55 @@ public class SimulacaoService {
         Deposito deposito = carregarDeposito();
 
         // Alocando pedidos em drones
-        ArrayList<Entrega> entregas = new ArrayList<>();
+        List<Entrega> entregas = montarEntregas(pedidosPendentes, drones, deposito);
+        ArrayList<Voo> voos = gerarVoos(entregas, deposito);
+
+        // Salva tudo automaticamente graças ao cascade
+        salvarResultados(voos, entregas);
+    }
+
+    private void salvarResultados(ArrayList<Voo> voos, List<Entrega> entregas) {
+        vooRepository.saveAll(voos);
+        entregaRepository.saveAll(entregas);
+    }
+
+    private ArrayList<Voo> gerarVoos(List<Entrega> entregas, Deposito deposito) {
         ArrayList<Voo> voos = new ArrayList<>();
+
+
+        // Calculando rotas para o voo
+        for (Entrega entrega: entregas)
+        {
+            ArrayList<Rota> rotas = new ArrayList<>();
+            Coordenada anterior = deposito.localizacao;
+            for (Pedido pedido: entrega.pedidos) {
+                Rota rota = new Rota();
+                rota.origem = anterior;
+                rota.destino = pedido.coordenada;
+                rotaRepository.save(rota);
+                rotas.add(rota);
+                anterior = pedido.coordenada;
+            }
+
+            // Volta ao depósito
+            Rota rotaFinal = new Rota();
+            rotaFinal.origem = anterior;
+            rotaFinal.destino = deposito.localizacao;
+            rotaRepository.save(rotaFinal);
+            rotas.add(rotaFinal);
+
+            // Criando o voo
+            Voo voo = new Voo();
+            voo.rotas.addAll(rotas);
+
+            entrega.voo = voo;
+            voos.add(voo);
+        }
+        return voos;
+    }
+
+    private List<Entrega> montarEntregas(List<Pedido> pedidosPendentes, List<Drone> drones, Deposito deposito) {
+        ArrayList<Entrega> entregas = new ArrayList<>();
         int droneIndex = 0;
         while (!pedidosPendentes.isEmpty()) {
             Pedido pedido = pedidosPendentes.removeFirst();
@@ -94,39 +141,7 @@ public class SimulacaoService {
                 entregas.add(entrega);
             }
         }
-
-        // Calculando rotas para o voo
-        for (Entrega entrega: entregas)
-        {
-            ArrayList<Rota> rotas = new ArrayList<>();
-            Coordenada anterior = deposito.localizacao;
-            for (Pedido pedido: entrega.pedidos) {
-                Rota rota = new Rota();
-                rota.origem = anterior;
-                rota.destino = pedido.coordenada;
-                rotaRepository.save(rota);
-                rotas.add(rota);
-                anterior = pedido.coordenada;
-            }
-
-            // Volta ao depósito
-            Rota rotaFinal = new Rota();
-            rotaFinal.origem = anterior;
-            rotaFinal.destino = deposito.localizacao;
-            rotaRepository.save(rotaFinal);
-            rotas.add(rotaFinal);
-
-            // Criando o voo
-            Voo voo = new Voo();
-            voo.rotas.addAll(rotas);
-
-            entrega.voo = voo;
-            voos.add(voo);
-        }
-
-        // Salva tudo automaticamente graças ao cascade
-        vooRepository.saveAll(voos);
-        entregaRepository.saveAll(entregas);
+        return entregas;
     }
 
     private Deposito carregarDeposito() {
