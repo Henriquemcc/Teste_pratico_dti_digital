@@ -50,7 +50,7 @@ Para testar este programa, realize os seguintes passos:
 
 Com o [Postman](https://www.postman.com/downloads/) instalado em sua máquina, importe a coleção [postman_collection.json](postman_collection.json).
 
-![Captura de tela do Postman com a coleção ´Postman Collection´](docs/Screenshots/000.png).
+![Captura de tela do Postman com a coleção ´Postman Collection chamada 'DTI Digital', mostrando as pastas 'Pedidos', 'Drones' 'Voos', 'Rotas', 'Depósito', 'Simulação' e 'Entrega'´](docs/Screenshots/000.png).
 
 ### 2. Com o programa em execução, popule o banco de dados com os seguintes elementos: Pedidos, Drones, Depósito.
 
