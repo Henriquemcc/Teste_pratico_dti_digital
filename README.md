@@ -6,7 +6,7 @@ Solução teste prático do processo seletivo para estágio na [DTI Digital](htt
 
 Para este projeto foi desenvolvido um Diagrama de Entidade Relacionamento Estendido (EER):
 
-<img src="./docs/EER.png">
+<img src="./docs/EER.png" alt="Diagrama Entidade Relacionamento com as entidades 'Voo', 'Pedido', 'Drone' e 'Depósito'. A entidade 'Pedido' possuí os atributos 'ID', 'Peso', 'Prioridade' e 'Localização do Cliente' (subdividido em 'x' e 'y'). A entidade 'Depósito' possuí os atributos 'Localização' (subdividido em 'x' e 'y') e 'ID'. A entidade 'Drone' possuí os atributos 'Capacidade', 'Distância por carga' e 'ID'. E a entidade 'Voo' possuí os seguinte atributos 'ID e 'Rotas' (subdividido em 'origem' e 'destino').">
 
 ## Tecnologias Utilizadas
 
