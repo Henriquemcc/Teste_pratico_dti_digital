@@ -122,7 +122,10 @@ public class SimulacaoService {
             rotas.add(rota);
 
             // Adicionando rotas ao voo
-            entrega.voo.rotas = rotas;
+            Voo voo = new Voo();
+            voo.rotas = rotas;
+            voos.add(voo);
+            entrega.voo = voo;
         }
 
         // Adicionando entregas e voos criados
