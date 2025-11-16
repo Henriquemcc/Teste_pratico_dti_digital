@@ -2,6 +2,7 @@ package io.github.henriquemcc.dtidigital.testepratico.service;
 
 import io.github.henriquemcc.dtidigital.testepratico.model.*;
 import io.github.henriquemcc.dtidigital.testepratico.repository.*;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,7 +33,8 @@ public class SimulacaoService {
         List<Pedido> pedidosPendentes = pedidoRepository.findByEntregueFalseOrderByPrioridadeDescPesoDesc();
 
         // Obtendo todos os drones ordenados pela capacidade
-        List<Drone> drones = droneRepository.findAllOrderByCapacidade();
+        List<Drone> drones = droneRepository.findAll(Sort.by(Sort.Direction.DESC, "capacidade"));
+
 
         // Obtendo o depósito
         Deposito deposito = depositoRepository.findAll().getFirst();
