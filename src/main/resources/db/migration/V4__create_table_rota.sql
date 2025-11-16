@@ -4,5 +4,7 @@ create table rota (
     origem_y double not null,
     destino_x double not null,
     destino_y double not null,
-    primary key(id)
+    voo_id bigint,
+    primary key(id),
+    foreign key (voo_id) references voo(id)
 );

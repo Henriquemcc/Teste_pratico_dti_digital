@@ -20,4 +20,8 @@ public class Rota {
             @AttributeOverride(name="y", column = @Column(name = "destino_y"))
     })
     public Coordenada destino;
+
+    @ManyToOne
+    @JoinColumn(name = "voo_id")
+    public Voo voo;
 }

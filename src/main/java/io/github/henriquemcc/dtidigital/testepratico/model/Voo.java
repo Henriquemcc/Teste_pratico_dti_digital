@@ -10,7 +10,7 @@ public class Voo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
-    @OneToMany
-    @ElementCollection
+
+    @OneToMany(mappedBy = "voo", cascade = CascadeType.ALL)
     public List<Rota> rotas = new ArrayList<>();
 }
