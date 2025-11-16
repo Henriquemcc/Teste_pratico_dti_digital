@@ -134,7 +134,7 @@ public class SimulacaoService {
         }
 
         // Adicionando entregas e voos criados
-        entregaRepository.saveAll(entregas);
         vooRepository.saveAll(voos);
+        entregaRepository.saveAll(entregas);
     }
 }
