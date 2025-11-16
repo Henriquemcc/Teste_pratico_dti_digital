@@ -17,6 +17,9 @@ public class Entrega {
     public Drone drone;
 
     @ManyToOne
+    public Deposito deposito;
+
+    @ManyToOne
     public Voo voo;
 
 

@@ -34,6 +34,7 @@ public class EntregaService {
         entregaAnterior.drone = entrega.drone;
         entregaAnterior.voo = entrega.voo;
         entregaAnterior.pedidos = entrega.pedidos;
+        entregaAnterior.deposito = entrega.deposito;
         return entregaAnterior;
     }
 
