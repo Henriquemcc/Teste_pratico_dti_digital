@@ -2,7 +2,7 @@ package io.github.henriquemcc.dtidigital.testepratico.model;
 
 import jakarta.persistence.*;
 
-@Embeddable
+@Entity
 public class Rota {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
