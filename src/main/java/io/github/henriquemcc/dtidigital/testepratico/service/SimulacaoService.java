@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -90,28 +91,35 @@ public class SimulacaoService {
     }
 
     private List<Entrega> montarEntregas(List<Pedido> pedidosPendentes, List<Drone> drones, Deposito deposito) {
+
+        // Separando as prioridades
+        List<Pedido> altas = pedidosPendentes.stream().filter(p -> p.prioridade == Prioridade.ALTA).toList();
+        List<Pedido> medias = pedidosPendentes.stream().filter(p -> p.prioridade == Prioridade.MEDIA).toList();
+        List<Pedido> baixas = pedidosPendentes.stream().filter(p -> p.prioridade == Prioridade.BAIXA).toList();
+
+        // Criando uma lista ordenada
+        LinkedList<Pedido> listaOrdenada = new LinkedList<>();
+        listaOrdenada.addAll(altas);
+        listaOrdenada.addAll(medias);
+        listaOrdenada.addAll(baixas);
+
+        // Criando lista de entregas
         ArrayList<Entrega> entregas = new ArrayList<>();
-        int droneIndex = 0;
-        while (!pedidosPendentes.isEmpty()) {
-            Pedido pedido = pedidosPendentes.removeFirst();
 
-            // Caso a lista de entregas esteja vazia, criando uma nova entrega
-            if (entregas.isEmpty()) {
-                Entrega entrega = new Entrega();
-                entrega.drone = drones.get(droneIndex);
-                entrega.deposito = deposito;
-                droneIndex = (droneIndex + 1) % drones.size();
-                entregas.add(entrega);
-            }
-
-
-            // Alocando os pedidos para o primeiro drone que encontrar com espaço necessário
+        while (!listaOrdenada.isEmpty())
+        {
+            Pedido pedido = listaOrdenada.removeFirst();
             boolean pedidoAlocado = false;
 
+            // tentando colocar o pedido em entregas existentes, mantendo a ordem de prioridade
+            for (Entrega entrega: entregas) {
+                // Verificando se o drone cabe o peso
+                boolean droneCabePeso = entrega.getPesoTotal() + pedido.peso <= entrega.drone.capacidade;
 
-            // Tentando alocar o pedido em uma entrega existente
-            for (Entrega entrega : entregas) {
-                if (entrega.getPesoTotal() + pedido.peso <= entrega.drone.capacidade && calcularDistancia(deposito.localizacao, pedido.coordenada) <= entrega.drone.distanciaPorCarga) {
+                // Verificando se a distância é compatível com o drone
+                boolean droneCabeDistancia = calcularDistancia(deposito.localizacao, pedido.coordenada) <= entrega.drone.distanciaPorCarga;
+
+                if (droneCabePeso && droneCabeDistancia) {
                     entrega.pedidos.add(pedido);
                     pedido.entregue = true;
                     pedidoAlocado = true;
@@ -119,26 +127,29 @@ public class SimulacaoService {
                 }
             }
 
-            // Caso o pedido não tenha sido alocado em uma entrega existente, criando uma nova entrega
+            // Se não couber em nenhuma entrega existente, criar uma nova entrega
             if (!pedidoAlocado) {
-                Entrega entrega = new Entrega();
-                entrega.deposito = deposito;
+                Entrega nova = new Entrega();
+                nova.deposito = deposito;
 
-                // Escolhendo um drone que tenha capacidade para a entrega
-                for (int i = droneIndex; i >= 0; i--) {
-                    Drone drone = drones.get(i);
-                    if (drone.capacidade >= pedido.peso && calcularDistancia(deposito.localizacao, pedido.coordenada) <= drone.distanciaPorCarga) {
-                        entrega.drone = drone;
+                // Escolhendo drone com suporte ao peso e ao alcance
+                for (Drone d: drones) {
+
+                    // Verificando se o drone cabe o peso
+                    boolean droneCabePeso = d.capacidade >= pedido.peso;
+
+                    // Verificando se o drone cabe a distância
+                    boolean droneCabeDistancia = calcularDistancia(deposito.localizacao, pedido.coordenada) <= d.distanciaPorCarga;
+
+                    if (droneCabePeso && droneCabeDistancia) {
+                        nova.drone = d;
                         break;
                     }
                 }
 
-                // Adicionando pedido á entrega
-                entrega.pedidos.add(pedido);
+                nova.pedidos.add(pedido);
                 pedido.entregue = true;
-
-                // Adicionando nova entrega
-                entregas.add(entrega);
+                entregas.add(nova);
             }
         }
         return entregas;
