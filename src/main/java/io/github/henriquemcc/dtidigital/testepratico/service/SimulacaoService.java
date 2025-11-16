@@ -50,6 +50,7 @@ public class SimulacaoService {
             if (entregas.isEmpty()) {
                 Entrega entrega = new Entrega();
                 entrega.drone = drones.get(droneIndex);
+                entrega.deposito = deposito;
                 droneIndex = (droneIndex + 1) % drones.size();
                 entregas.add(entrega);
             }
@@ -72,6 +73,7 @@ public class SimulacaoService {
             // Caso o pedido não tenha sido alocado em uma entrega existente, criando uma nova entrega
             if (!pedidoAlocado) {
                 Entrega entrega = new Entrega();
+                entrega.deposito = deposito;
 
                 // Escolhendo um drone que tenha capacidade para a entrega
                 for (int i = droneIndex; i >= 0; i--) {
