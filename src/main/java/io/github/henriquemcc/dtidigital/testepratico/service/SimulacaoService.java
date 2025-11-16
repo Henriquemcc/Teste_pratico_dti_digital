@@ -1,13 +1,7 @@
 package io.github.henriquemcc.dtidigital.testepratico.service;
 
-import io.github.henriquemcc.dtidigital.testepratico.model.Drone;
-import io.github.henriquemcc.dtidigital.testepratico.model.Entrega;
-import io.github.henriquemcc.dtidigital.testepratico.model.Pedido;
-import io.github.henriquemcc.dtidigital.testepratico.model.Voo;
-import io.github.henriquemcc.dtidigital.testepratico.repository.DroneRepository;
-import io.github.henriquemcc.dtidigital.testepratico.repository.EntregaRepository;
-import io.github.henriquemcc.dtidigital.testepratico.repository.PedidoRepository;
-import io.github.henriquemcc.dtidigital.testepratico.repository.VooRepository;
+import io.github.henriquemcc.dtidigital.testepratico.model.*;
+import io.github.henriquemcc.dtidigital.testepratico.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,12 +13,18 @@ public class SimulacaoService {
     private final EntregaRepository entregaRepository;
     private final VooRepository vooRepository;
     private final DroneRepository droneRepository;
+    private final DepositoRepository depositoRepository;
 
-    public SimulacaoService(PedidoRepository pedidoRepository, EntregaRepository entregaRepository, VooRepository vooRepository, DroneRepository droneRepository) {
+    public SimulacaoService(PedidoRepository pedidoRepository, EntregaRepository entregaRepository, VooRepository vooRepository, DroneRepository droneRepository, DepositoRepository depositoRepository) {
         this.pedidoRepository = pedidoRepository;
         this.entregaRepository = entregaRepository;
         this.vooRepository = vooRepository;
         this.droneRepository = droneRepository;
+        this.depositoRepository = depositoRepository;
+    }
+
+    private static double calcularDistancia(Coordenada origem, Coordenada destino) {
+        return Math.sqrt(Math.pow(destino.x - origem.x, 2) + Math.pow(destino.y - origem.y, 2));
     }
 
     public void executarSimulacao() {
@@ -33,6 +33,9 @@ public class SimulacaoService {
 
         // Obtendo todos os drones ordenados pela capacidade
         List<Drone> drones = droneRepository.findAllOrderByCapacidade();
+
+        // Obtendo o depósito
+        Deposito deposito = depositoRepository.findAll().getFirst();
 
         // Alocando pedidos em drones
         ArrayList<Entrega> entregas = new ArrayList<>();
@@ -56,7 +59,7 @@ public class SimulacaoService {
 
             // Tentando alocar o pedido em uma entrega existente
             for (Entrega entrega : entregas) {
-                if (entrega.getPesoTotal() + pedido.peso <= entrega.drone.capacidade) {
+                if (entrega.getPesoTotal() + pedido.peso <= entrega.drone.capacidade && calcularDistancia(deposito.localizacao, pedido.coordenada) <= entrega.drone.distanciaPorCarga) {
                     entrega.pedidos.add(pedido);
                     pedidoAlocado = true;
                     break;
@@ -70,7 +73,7 @@ public class SimulacaoService {
                 // Escolhendo um drone que tenha capacidade para a entrega
                 for (int i = droneIndex; i >= 0; i--) {
                     Drone drone = drones.get(i);
-                    if (drone.capacidade >= pedido.peso) {
+                    if (drone.capacidade >= pedido.peso && calcularDistancia(deposito.localizacao, pedido.coordenada) <= drone.distanciaPorCarga) {
                         entrega.drone = drone;
                         break;
                     }
