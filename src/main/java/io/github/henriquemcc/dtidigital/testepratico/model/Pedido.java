@@ -11,4 +11,5 @@ public class Pedido {
     public Prioridade prioridade;
     @Embedded
     public Coordenada coordenada;
+    public boolean entregue = false;
 }
