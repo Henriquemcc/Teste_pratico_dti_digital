@@ -15,13 +15,15 @@ public class SimulacaoService {
     private final VooRepository vooRepository;
     private final DroneRepository droneRepository;
     private final DepositoRepository depositoRepository;
+    private final RotaRepository rotaRepository;
 
-    public SimulacaoService(PedidoRepository pedidoRepository, EntregaRepository entregaRepository, VooRepository vooRepository, DroneRepository droneRepository, DepositoRepository depositoRepository) {
+    public SimulacaoService(PedidoRepository pedidoRepository, EntregaRepository entregaRepository, VooRepository vooRepository, DroneRepository droneRepository, DepositoRepository depositoRepository, RotaRepository rotaRepository) {
         this.pedidoRepository = pedidoRepository;
         this.entregaRepository = entregaRepository;
         this.vooRepository = vooRepository;
         this.droneRepository = droneRepository;
         this.depositoRepository = depositoRepository;
+        this.rotaRepository = rotaRepository;
     }
 
     private static double calcularDistancia(Coordenada origem, Coordenada destino) {
@@ -126,6 +128,9 @@ public class SimulacaoService {
             voo.rotas = rotas;
             voos.add(voo);
             entrega.voo = voo;
+
+            // Salvando rotas
+            rotaRepository.saveAll(rotas);
         }
 
         // Adicionando entregas e voos criados
