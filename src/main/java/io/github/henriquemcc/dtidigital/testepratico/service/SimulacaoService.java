@@ -93,6 +93,38 @@ public class SimulacaoService {
             }
         }
 
+        // Calculando rotas para o voo
+        for (Entrega entrega: entregas)
+        {
+            ArrayList<Rota> rotas = new ArrayList<>();
+            Coordenada anterior = deposito.localizacao;
+            Coordenada atual = deposito.localizacao;
+            for (Pedido pedido: entrega.pedidos) {
+
+                // Obtendo a rota de destino de entrega
+                atual = pedido.coordenada;
+
+                // Adicionando a rota do ponto anterior até o destino da entrega
+                Rota rota = new Rota();
+                rota.origem = anterior;
+                rota.destino = atual;
+                rotas.add(rota);
+
+                // Alterando o valor da rota anterior para o da atual
+                anterior = atual;
+            }
+
+            // Adicionando a rota para voltar para o depósito
+            atual = deposito.localizacao;
+            Rota rota = new Rota();
+            rota.origem = anterior;
+            rota.destino = atual;
+            rotas.add(rota);
+
+            // Adicionando rotas ao voo
+            entrega.voo.rotas = rotas;
+        }
+
         // Adicionando entregas e voos criados
         entregaRepository.saveAll(entregas);
         vooRepository.saveAll(voos);
