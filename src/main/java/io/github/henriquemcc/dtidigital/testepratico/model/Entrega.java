@@ -2,6 +2,7 @@ package io.github.henriquemcc.dtidigital.testepratico.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,7 +12,7 @@ public class Entrega {
     public long id;
 
     @OneToMany
-    public List<Pedido> pedidos;
+    public List<Pedido> pedidos = new ArrayList<>();
 
     @ManyToOne
     public Drone drone;
@@ -25,7 +26,7 @@ public class Entrega {
 
     public double getPesoTotal() {
         double pesoTotal = 0;
-        for (Pedido pedido: pedidos) {
+        if (pedidos != null) for (Pedido pedido: pedidos) {
             pesoTotal += pedido.peso;
         }
         return pesoTotal;
