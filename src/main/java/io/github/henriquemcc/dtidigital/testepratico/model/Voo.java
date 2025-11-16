@@ -11,6 +11,11 @@ public class Voo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
 
-    @OneToMany(mappedBy = "voo", cascade = CascadeType.ALL)
+    @OneToMany
+    @JoinTable(
+            name = "voo_rotas",
+            joinColumns = @JoinColumn(name = "voo_id"),
+            inverseJoinColumns = @JoinColumn(name = "rota_id")
+    )
     public List<Rota> rotas = new ArrayList<>();
 }
