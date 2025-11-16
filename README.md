@@ -41,3 +41,33 @@ No Prompt de Comando do Windows:
 ```bat
 gradlew bootRun
 ```
+
+## Como testar o programa
+
+Para testar este programa, realize os seguintes passos:
+
+### 1. Importe a coleção de requisições do Postman
+
+Com o [Postman](https://www.postman.com/downloads/) instalado em sua máquina, importe a coleção [postman_collection.json](postman_collection.json).
+
+![Captura de tela do Postman com a coleção ´Postman Collection´](docs/Screenshots/000.png).
+
+### 2. Com o programa em execução, popule o banco de dados com os seguintes elementos: Pedidos, Drones, Depósito.
+
+Na pasta 'Pedidos', execute as requisições 'POST Pedido 1', 'POST Pedido 2', 'POST Pedido 3', 'POST Pedido 4' e 'POST Pedido 5'.
+
+Na pasta 'Drones', execute as requisições 'POST Drone 1', 'POST Drone 2' e 'POST Drone 3'.
+
+E na pasta 'Depósito', execute as requisições 'POST Depósito'.
+
+### 3. Execute a simulação:
+
+Na pasta 'Simulacao', execute a requisição 'POST Simulacao'.
+
+### 4. Acesse os resultados:
+
+Na pasta 'Voos', execute a requisição 'GET Voos'.
+
+Na pasta 'Rotas', execute a requisição 'GET Rotas'.
+
+E na pasta 'Entrega', execute a requisição 'GET Entregas'.
