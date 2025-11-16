@@ -63,6 +63,7 @@ public class SimulacaoService {
             for (Entrega entrega : entregas) {
                 if (entrega.getPesoTotal() + pedido.peso <= entrega.drone.capacidade && calcularDistancia(deposito.localizacao, pedido.coordenada) <= entrega.drone.distanciaPorCarga) {
                     entrega.pedidos.add(pedido);
+                    pedido.entregue = true;
                     pedidoAlocado = true;
                     break;
                 }
@@ -83,6 +84,7 @@ public class SimulacaoService {
 
                 // Adicionando pedido á entrega
                 entrega.pedidos.add(pedido);
+                pedido.entregue = true;
 
                 // Adicionando nova entrega
                 entregas.add(entrega);
