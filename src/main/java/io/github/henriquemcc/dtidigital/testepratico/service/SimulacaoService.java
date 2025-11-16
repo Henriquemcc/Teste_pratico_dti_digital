@@ -32,14 +32,14 @@ public class SimulacaoService {
 
     public void executarSimulacao() {
         // Obtendo todos os pedidos que não foram entregues ordenados pela prioridade
-        List<Pedido> pedidosPendentes = pedidoRepository.findByEntregueFalseOrderByPrioridadeDescPesoDesc();
+        List<Pedido> pedidosPendentes = carregarPedidosPendentes();
 
         // Obtendo todos os drones ordenados pela capacidade
-        List<Drone> drones = droneRepository.findAll(Sort.by(Sort.Direction.DESC, "capacidade"));
+        List<Drone> drones = carregarDronesOrdenados();
 
 
         // Obtendo o depósito
-        Deposito deposito = depositoRepository.findAll().getFirst();
+        Deposito deposito = carregarDeposito();
 
         // Alocando pedidos em drones
         ArrayList<Entrega> entregas = new ArrayList<>();
@@ -127,5 +127,17 @@ public class SimulacaoService {
         // Salva tudo automaticamente graças ao cascade
         vooRepository.saveAll(voos);
         entregaRepository.saveAll(entregas);
+    }
+
+    private Deposito carregarDeposito() {
+        return depositoRepository.findAll().getFirst();
+    }
+
+    private List<Drone> carregarDronesOrdenados() {
+        return droneRepository.findAll(Sort.by(Sort.Direction.DESC, "capacidade"));
+    }
+
+    private List<Pedido> carregarPedidosPendentes() {
+        return pedidoRepository.findByEntregueFalseOrderByPrioridadeDescPesoDesc();
     }
 }
