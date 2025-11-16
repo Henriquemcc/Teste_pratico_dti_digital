@@ -100,40 +100,34 @@ public class SimulacaoService {
         {
             ArrayList<Rota> rotas = new ArrayList<>();
             Coordenada anterior = deposito.localizacao;
-            Coordenada atual = deposito.localizacao;
             for (Pedido pedido: entrega.pedidos) {
-
-                // Obtendo a rota de destino de entrega
-                atual = pedido.coordenada;
-
-                // Adicionando a rota do ponto anterior até o destino da entrega
                 Rota rota = new Rota();
                 rota.origem = anterior;
-                rota.destino = atual;
+                rota.destino = pedido.coordenada;
                 rotas.add(rota);
-
-                // Alterando o valor da rota anterior para o da atual
-                anterior = atual;
+                anterior = pedido.coordenada;
             }
 
-            // Adicionando a rota para voltar para o depósito
-            atual = deposito.localizacao;
-            Rota rota = new Rota();
-            rota.origem = anterior;
-            rota.destino = atual;
-            rotas.add(rota);
+            // Volta ao depósito
+            Rota rotaFinal = new Rota();
+            rotaFinal.origem = anterior;
+            rotaFinal.destino = deposito.localizacao;
+            rotas.add(rotaFinal);
 
-            // Adicionando rotas ao voo
+            // Criando o voo
             Voo voo = new Voo();
-            voo.rotas = rotas;
-            voos.add(voo);
-            entrega.voo = voo;
 
-            // Salvando rotas
-            rotaRepository.saveAll(rotas);
+            // Relacionamento bidirecional correto
+            for (Rota r : rotas) {
+                r.voo = voo;         // chave estrangeira
+                voo.rotas.add(r);    // mantém a lista
+            }
+
+            entrega.voo = voo;
+            voos.add(voo);
         }
 
-        // Adicionando entregas e voos criados
+        // Salva tudo automaticamente graças ao cascade
         vooRepository.saveAll(voos);
         entregaRepository.saveAll(entregas);
     }
