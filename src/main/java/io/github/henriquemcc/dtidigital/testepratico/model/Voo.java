@@ -2,6 +2,7 @@ package io.github.henriquemcc.dtidigital.testepratico.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,5 +12,5 @@ public class Voo {
     public long id;
     @OneToMany
     @ElementCollection
-    public List<Rota> rotas;
+    public List<Rota> rotas = new ArrayList<>();
 }
