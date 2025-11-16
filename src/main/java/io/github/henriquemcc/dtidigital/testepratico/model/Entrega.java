@@ -18,4 +18,13 @@ public class Entrega {
 
     @ManyToOne
     public Voo voo;
+
+
+    public double getPesoTotal() {
+        double pesoTotal = 0;
+        for (Pedido pedido: pedidos) {
+            pesoTotal += pedido.peso;
+        }
+        return pesoTotal;
+    }
 }
