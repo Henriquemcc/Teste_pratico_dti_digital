@@ -10,5 +10,6 @@ public class Voo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     @OneToMany
+    @ElementCollection
     public List<Rota> rotas;
 }
