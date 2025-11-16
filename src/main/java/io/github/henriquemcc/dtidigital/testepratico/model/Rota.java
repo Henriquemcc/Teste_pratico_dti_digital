@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 @Embeddable
 public class Rota {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long id;
+
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name="x", column = @Column(name = "origem_x")),
