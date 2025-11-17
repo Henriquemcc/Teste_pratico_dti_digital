@@ -35,7 +35,7 @@ public class DepositoServiceTest {
     }
 
     @Test
-    public void deveListarNotFoundExceptionQuandoDepositoNaoForAchado() {
+    public void deveLancarNotFoundExceptionQuandoDepositoNaoForAchado() {
         long idInexistente = 999L;
         when(depositoRepository.findById(idInexistente)).thenReturn(Optional.empty());
 
