@@ -38,9 +38,7 @@ public class DepositoServiceTest {
     public void deveLancarNotFoundExceptionQuandoDepositoNaoForAchado() {
         long idInexistente = 999L;
         when(depositoRepository.findById(idInexistente)).thenReturn(Optional.empty());
-
         NotFoundException thrown = assertThrows(NotFoundException.class, () -> depositoService.buscarPorId(idInexistente));
-
         assertEquals("Depósito não encontrado", thrown.getMessage());
     }
 }
