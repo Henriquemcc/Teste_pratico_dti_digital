@@ -10,6 +10,9 @@ public class Drone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
+    public String marca;
+    public String modelo;
+    public String numeroSerie;
     public float distanciaPorCarga;
     public float capacidade;
 }

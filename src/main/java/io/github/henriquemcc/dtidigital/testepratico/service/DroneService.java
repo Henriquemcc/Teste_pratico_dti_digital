@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class DroneService {
-    private DroneRepository droneRepository;
+    private final DroneRepository droneRepository;
     private final String notFoundMessage = "Drone não encontrado";
 
     public DroneService(DroneRepository droneRepository) {
@@ -31,6 +31,9 @@ public class DroneService {
 
     public Drone atualizar(Drone drone, long idDrone) {
         Drone droneAnterior = droneRepository.findById(idDrone).orElseThrow(() -> new NotFoundException(notFoundMessage));
+        droneAnterior.marca = drone.marca;
+        droneAnterior.modelo = drone.modelo;
+        droneAnterior.numeroSerie = drone.numeroSerie;
         droneAnterior.capacidade = drone.capacidade;
         droneAnterior.distanciaPorCarga = drone.distanciaPorCarga;
         return droneAnterior;
