@@ -31,6 +31,7 @@ public class DepositoService {
 
     public Deposito atualizar(Deposito deposito, long idDeposito) {
         Deposito depositoAnterior = depositoRepository.findById(idDeposito).orElseThrow(() -> new NotFoundException(notFoundMessage));
+        depositoAnterior.nome = deposito.nome;
         depositoAnterior.localizacao = deposito.localizacao;
         return depositoAnterior;
     }

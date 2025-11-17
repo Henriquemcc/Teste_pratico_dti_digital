@@ -7,10 +7,12 @@ public class Deposito {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
+    public String nome;
     @Embedded
     public Coordenada localizacao = new Coordenada();
 
-    public Deposito(Coordenada localizacao) {
+    public Deposito(String nome, Coordenada localizacao) {
+        this.nome = nome;
         this.localizacao = localizacao;
     }
 
