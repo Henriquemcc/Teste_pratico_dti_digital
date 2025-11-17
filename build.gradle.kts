@@ -16,6 +16,7 @@ java {
 
 repositories {
 	mavenCentral()
+    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
@@ -27,8 +28,8 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
-	testImplementation("org.testcontainers:junit-jupiter")
-	testImplementation("org.testcontainers:mysql")
+    implementation("com.github.testcontainers.testcontainers-java:testcontainers-junit-jupiter:2.0.2")
+    implementation("com.github.testcontainers.testcontainers-java:testcontainers-mysql:2.0.2")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
