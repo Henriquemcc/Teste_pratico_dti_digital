@@ -90,3 +90,11 @@ Na pasta 'Voos', execute a requisição 'GET Voos'.
 Na pasta 'Rotas', execute a requisição 'GET Rotas'.
 
 E na pasta 'Entrega', execute a requisição 'GET Entregas'.
+
+## IA Generativa
+
+Para este trabalho foram utilizados os modelos ChatGPT e Google Gemini.
+
+As conversas realizadas com esses modelos estão disponíveis em [docs/IA_Generativa](docs/IA_Generativa) no formato MHTML.
+
+Para visualizar esses arquivos, é necessário baixá-los e abri-los no navegador Google Chrome.
