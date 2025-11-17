@@ -9,4 +9,12 @@ public class Deposito {
     public long id;
     @Embedded
     public Coordenada localizacao = new Coordenada();
+
+    public Deposito(Coordenada localizacao) {
+        this.localizacao = localizacao;
+    }
+
+    public Deposito() {
+
+    }
 }
