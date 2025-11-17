@@ -76,33 +76,12 @@ public class SimulacaoServiceTest {
 
         }).when(entregaRepository).saveAll(Mockito.anyIterable());
 
-        // Redirecionamento da chamada de save do entregaRepository
-        Mockito.doAnswer((Answer<Object>) invocation -> {
-            Entrega entregaSalva = invocation.getArgument(0);
-            entregas.add(entregaSalva);
-            return entregaSalva;
-        }).when(entregaRepository).save(Mockito.any());
-
         // Redirecionamento da chamade de saveAll do vooRepository
         Mockito.doAnswer((Answer<Object>) invocation -> {
             Collection<Voo> voosSalvos = invocation.getArgument(0);
             voos.addAll(voosSalvos);
             return voosSalvos;
         }).when(vooRepository).saveAll(Mockito.anyIterable());
-
-        // Redirecionamento da chamada de save de vooRepository
-        Mockito.doAnswer((Answer<Object>) invocation -> {
-            Voo vooSalvo = invocation.getArgument(0);
-            voos.add(vooSalvo);
-            return vooSalvo;
-        }).when(vooRepository).save(Mockito.any());
-
-        // Redirecionamento da chamade de saveAll do rotaRepository
-        Mockito.doAnswer((Answer<Object>) invocation -> {
-           Collection<Rota> rotasSalvas = invocation.getArgument(0);
-           rotas.addAll(rotasSalvas);
-           return rotasSalvas;
-        }).when(rotaRepository).saveAll(Mockito.anyIterable());
 
         // Redirecionamento da chamada de save de rotaRepository
         Mockito.doAnswer((Answer<Object>) invocation -> {
