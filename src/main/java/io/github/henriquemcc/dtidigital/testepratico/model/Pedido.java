@@ -10,6 +10,16 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     public Prioridade prioridade;
     @Embedded
-    public Coordenada coordenada;
+    public Coordenada coordenada = new Coordenada();
     public boolean entregue = false;
+
+    public Pedido(float peso, Prioridade prioridade, Coordenada coordenada) {
+        this.peso = peso;
+        this.prioridade = prioridade;
+        this.coordenada = coordenada;
+    }
+
+    public Pedido() {
+
+    }
 }
