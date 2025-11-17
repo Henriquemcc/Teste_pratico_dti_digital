@@ -17,4 +17,8 @@ public abstract class DatabaseContainerConfiguration {
         registry.add("spring.datasource.username", mysqlContainer::getUsername);
         registry.add("spring.datasource.driverClassName", mysqlContainer::getDriverClassName);
     }
+
+    static {
+        mysqlContainer.start();
+    }
 }
