@@ -46,9 +46,23 @@ public class SimulacaoServiceTest {
             new Pedido("Impressora 3D", 6000.00f, "Impressora 3D completa", 4.8f, Prioridade.BAIXA, new Coordenada(25, 40))
     );
     private List<Drone> drones = List.of(
-            new Drone("Drone INC", "Heavy Load", "1", 200, 10),
-            new Drone("Drone INC", "Soft Load", "2", 10, 5),
-            new Drone("Drone INC", "Medium Load", "3", 50, 7)
+            // Drones de Carga Pesada (Heavy)
+            new Drone("MegaDrone Corp", "Titan 5000", "A01", 350.0f, 15.0f),
+            new Drone("AeroFreight Systems", "Hercules H-1", "A02", 280.0f, 12.0f),
+
+            // Drones de Carga Média (Medium)
+            new Drone("Swift Delivery", "Medium Hauler", "B03", 80.0f, 25.0f),
+            new Drone("SkyLift Logistics", "M-Cargo Pro", "B04", 65.0f, 20.0f),
+            new Drone("RoboFly Express", "Mid-Range V2", "B05", 50.0f, 22.0f),
+
+            // Drones de Carga Leve (Light/Soft)
+            new Drone("PicoTransports", "Soft Touch", "C06", 15.0f, 40.0f),
+            new Drone("Urban Runner", "Quick Dash", "C07", 8.0f, 50.0f),
+            new Drone("FeatherWeight Drones", "Lite-Speed", "C08", 5.0f, 60.0f),
+
+            // Drones de Propósito Geral (Balanced)
+            new Drone("OmniFleet", "FlexiLoad 100", "D09", 100.0f, 30.0f),
+            new Drone("Global Aviator", "Standard Utility", "D10", 30.0f, 35.0f)
     );
 
     private ArrayList<Entrega> entregas = new ArrayList<>();
