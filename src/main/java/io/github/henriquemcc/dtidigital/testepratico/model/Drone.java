@@ -15,4 +15,16 @@ public class Drone {
     public String numeroSerie;
     public float distanciaPorCarga;
     public float capacidade;
+
+    public Drone(String marca, String modelo, String numeroSerie, float distanciaPorCarga, float capacidade) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.numeroSerie = numeroSerie;
+        this.distanciaPorCarga = distanciaPorCarga;
+        this.capacidade = capacidade;
+    }
+
+    public Drone() {
+
+    }
 }
