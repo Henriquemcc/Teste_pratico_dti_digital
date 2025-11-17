@@ -9,14 +9,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
-import org.springframework.boot.test.autoconfigure.data.cassandra.DataCassandraTest;
 import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static io.github.henriquemcc.dtidigital.testepratico.tmp.JsonPrinter.imprimirComoJson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
