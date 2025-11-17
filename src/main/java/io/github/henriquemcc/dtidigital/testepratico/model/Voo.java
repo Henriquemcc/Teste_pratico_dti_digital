@@ -18,4 +18,12 @@ public class Voo {
             inverseJoinColumns = @JoinColumn(name = "rota_id")
     )
     public List<Rota> rotas = new ArrayList<>();
+
+    public Voo(List<Rota> rotas) {
+        this.rotas = rotas;
+    }
+
+    public Voo() {
+
+    }
 }
