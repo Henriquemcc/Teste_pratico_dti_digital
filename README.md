@@ -42,7 +42,23 @@ No Prompt de Comando do Windows:
 gradlew bootRun
 ```
 
-## Como testar o programa
+## Como executar os testes de unidades
+
+Para executar os testes de unidades, na pasta do projeto abra um terminal (ou prompt de comando) e digite o seguinte comando:
+
+No Terminal do Linux e Mac, ou no PowerShell do Windows:
+
+```shell
+./gradlew test
+```
+
+No Prompt de Comando do Windows:
+
+```bat
+gradlew test
+```
+
+## Como testar manualmente o programa
 
 Para testar este programa, realize os seguintes passos:
 
