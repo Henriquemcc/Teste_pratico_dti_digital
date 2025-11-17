@@ -67,10 +67,10 @@ public class SimulacaoService {
             for (Pedido pedido: entrega.pedidos) {
                 Rota rota = new Rota();
                 rota.origem = anterior;
-                rota.destino = pedido.coordenada;
+                rota.destino = pedido.destino;
                 rotaRepository.save(rota);
                 rotas.add(rota);
-                anterior = pedido.coordenada;
+                anterior = pedido.destino;
             }
 
             // Volta ao depósito
@@ -117,7 +117,7 @@ public class SimulacaoService {
                 boolean droneCabePeso = entrega.getPesoTotal() + pedido.peso <= entrega.drone.capacidade;
 
                 // Verificando se a distância é compatível com o drone
-                boolean droneCabeDistancia = calcularDistancia(deposito.localizacao, pedido.coordenada) <= entrega.drone.distanciaPorCarga;
+                boolean droneCabeDistancia = calcularDistancia(deposito.localizacao, pedido.destino) <= entrega.drone.distanciaPorCarga;
 
                 if (droneCabePeso && droneCabeDistancia) {
                     entrega.pedidos.add(pedido);
@@ -139,7 +139,7 @@ public class SimulacaoService {
                     boolean droneCabePeso = d.capacidade >= pedido.peso;
 
                     // Verificando se o drone cabe a distância
-                    boolean droneCabeDistancia = calcularDistancia(deposito.localizacao, pedido.coordenada) <= d.distanciaPorCarga;
+                    boolean droneCabeDistancia = calcularDistancia(deposito.localizacao, pedido.destino) <= d.distanciaPorCarga;
 
                     if (droneCabePeso && droneCabeDistancia) {
                         nova.drone = d;

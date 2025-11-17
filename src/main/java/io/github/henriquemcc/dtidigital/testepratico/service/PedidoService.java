@@ -31,7 +31,10 @@ public class PedidoService {
 
     public Pedido atualizar(Pedido pedido, long idPedido) {
         Pedido pedidoAnterior = pedidoRepository.findById(idPedido).orElseThrow(() -> new NotFoundException(notFoundMessage));
-        pedidoAnterior.coordenada = pedido.coordenada;
+        pedidoAnterior.nome = pedido.nome;
+        pedidoAnterior.valor = pedido.valor;
+        pedidoAnterior.descricao = pedido.descricao;
+        pedidoAnterior.destino = pedido.destino;
         pedidoAnterior.peso = pedido.peso;
         pedidoAnterior.prioridade = pedido.prioridade;
         return pedidoAnterior;
