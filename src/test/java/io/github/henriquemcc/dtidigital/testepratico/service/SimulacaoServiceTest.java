@@ -16,19 +16,34 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static io.github.henriquemcc.dtidigital.testepratico.tmp.JsonPrinter.imprimirComoJson;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class SimulacaoServiceTest {
     private List<Deposito> depositos = List.of(new Deposito("Depósito", new Coordenada(0,0)));
     private List<Pedido> pedidos = List.of(
-            new Pedido("Tenis", 500.0f, "Tenis de corrida", 0.001f, Prioridade.BAIXA, new Coordenada(10, 15)),
-            new Pedido("Calça", 500.0f, "Calça Jeans", 0.001f, Prioridade.BAIXA, new Coordenada(40, 14)),
-            new Pedido("Meia", 500.0f, "Meia", 0.001f, Prioridade.BAIXA, new Coordenada(13, 24)),
-            new Pedido("Livro", 200.0f, "Livro didático", 0.3f, Prioridade.MEDIA, new Coordenada(15, 16)),
-            new Pedido("Computador", 5000.0f, "Laptop", 0.3f, Prioridade.ALTA, new Coordenada(26, 32)),
-            new Pedido("Lápis", 14, "Lápis", 0.0001f, Prioridade.BAIXA, new Coordenada(100, 24)),
-            new Pedido("Pão de queijo", 3, "Pão de queijo congelado", 0.001f, Prioridade.ALTA, new Coordenada(123, 132))
+            new Pedido("Fone de Ouvido", 145.78f, "Descrição detalhada de Fone de Ouvido", 0.1234f, Prioridade.MEDIA, new Coordenada(12, 187)),
+            new Pedido("Smart TV", 3567.50f, "Descrição detalhada de Smart TV", 3.4567f, Prioridade.ALTA, new Coordenada(89, 45)),
+            new Pedido("Câmera DSLR", 5210.99f, "Descrição detalhada de Câmera DSLR", 1.8765f, Prioridade.BAIXA, new Coordenada(155, 98)),
+            new Pedido("Relógio Inteligente", 890.35f, "Descrição detalhada de Relógio Inteligente", 0.0567f, Prioridade.MEDIA, new Coordenada(33, 112)),
+            new Pedido("Kit Ferramentas", 256.40f, "Descrição detalhada de Kit Ferramentas", 4.9876f, Prioridade.BAIXA, new Coordenada(199, 1)),
+            new Pedido("Teclado Mecânico", 560.15f, "Descrição detalhada de Teclado Mecânico", 1.0123f, Prioridade.ALTA, new Coordenada(76, 76)),
+            new Pedido("HD Externo", 450.00f, "Descrição detalhada de HD Externo", 0.4500f, Prioridade.MEDIA, new Coordenada(5, 5)),
+            new Pedido("Mochila", 120.90f, "Descrição detalhada de Mochila", 0.8900f, Prioridade.BAIXA, new Coordenada(150, 200)),
+            new Pedido("Tênis Esportivo", 340.50f, "Descrição detalhada de Tênis Esportivo", 0.2300f, Prioridade.ALTA, new Coordenada(100, 100)),
+            new Pedido("Cafeteira Elétrica", 180.25f, "Descrição detalhada de Cafeteira Elétrica", 2.1000f, Prioridade.BAIXA, new Coordenada(60, 140)),
+            new Pedido("Celular", 3200.00f, "Smartphone de última geração", 0.35f, Prioridade.ALTA, new Coordenada(5, 5)),
+            new Pedido("Jogo de Pratos", 120.50f, "Conjunto de pratos de cerâmica", 2.1f, Prioridade.BAIXA, new Coordenada(78, 92)),
+            new Pedido("Cadeira de Escritório", 950.00f, "Cadeira ergonômica desmontada", 1.8f, Prioridade.MEDIA, new Coordenada(15, 80)),
+            new Pedido("Caneta Gel", 5.90f, "Pacote com 10 canetas", 0.01f, Prioridade.BAIXA, new Coordenada(145, 110)),
+            new Pedido("Remédio Controlado", 450.00f, "Caixa de medicamentos sob prescrição", 0.7f, Prioridade.ALTA, new Coordenada(30, 20)),
+            new Pedido("Saco de Cimento", 35.00f, "Material de construção (saco de 5kg)", 5.0f, Prioridade.MEDIA, new Coordenada(190, 10)),
+            new Pedido("Óculos de Sol", 280.00f, "Óculos polarizados", 0.05f, Prioridade.BAIXA, new Coordenada(55, 65)),
+            new Pedido("Monitor 27 Polegadas", 1800.00f, "Monitor de computador", 3.5f, Prioridade.ALTA, new Coordenada(180, 175)),
+            new Pedido("Cartão de Memória", 45.00f, "Cartão SD 128GB", 0.005f, Prioridade.MEDIA, new Coordenada(12, 160)),
+            new Pedido("Impressora 3D", 6000.00f, "Impressora 3D completa", 4.8f, Prioridade.BAIXA, new Coordenada(25, 40))
     );
     private List<Drone> drones = List.of(
             new Drone("Drone INC", "Heavy Load", "1", 200, 10),
@@ -60,7 +75,7 @@ public class SimulacaoServiceTest {
     public void deveRealizarSomenteUmaEntrega() {
         redirecionarChamadasRepositories();
         simulacaoService.executarSimulacao();
-        System.out.println(entregas);
+        assertEquals(entregas.size(), 1);
     }
 
     private void redirecionarChamadasRepositories() {
