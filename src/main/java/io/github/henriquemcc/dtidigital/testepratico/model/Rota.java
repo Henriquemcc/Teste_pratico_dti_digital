@@ -12,12 +12,21 @@ public class Rota {
             @AttributeOverride(name="x", column = @Column(name = "origem_x")),
             @AttributeOverride(name="y", column = @Column(name = "origem_y"))
     })
-    public Coordenada origem;
+    public Coordenada origem = new Coordenada();
 
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name="x", column = @Column(name = "destino_x")),
             @AttributeOverride(name="y", column = @Column(name = "destino_y"))
     })
-    public Coordenada destino;
+    public Coordenada destino = new Coordenada();
+
+    public Rota(Coordenada origem, Coordenada destino) {
+        this.origem = origem;
+        this.destino = destino;
+    }
+
+    public Rota() {
+
+    }
 }
