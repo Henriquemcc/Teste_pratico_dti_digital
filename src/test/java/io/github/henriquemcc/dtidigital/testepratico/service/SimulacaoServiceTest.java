@@ -80,12 +80,13 @@ public class SimulacaoServiceTest {
 
     @Test
     public void deveRealizarSomenteUmaEntrega() {
-        redirecionarChamadasRepositories();
+        List<Pedido> subsetPedidos = pedidos.subList(13, 14);
+        redirecionarChamadasRepositories(depositos, subsetPedidos, drones);
         simulacaoService.executarSimulacao();
         assertEquals(entregas.size(), 1);
     }
 
-    private void redirecionarChamadasRepositories() {
+    private void redirecionarChamadasRepositories(List<Deposito> depositos, List<Pedido> pedidos, List<Drone> drones) {
         when(depositoRepository.findAll()).thenReturn(depositos);
         when(pedidoRepository.findByEntregueFalseOrderByPrioridadeDescPesoDesc()).thenReturn(pedidos);
         when(droneRepository.findAll(Mockito.any(Sort.class))).thenReturn(drones);
