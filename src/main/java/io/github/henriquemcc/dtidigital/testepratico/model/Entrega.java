@@ -15,14 +15,24 @@ public class Entrega {
     public List<Pedido> pedidos = new ArrayList<>();
 
     @ManyToOne
-    public Drone drone;
+    public Drone drone = new Drone();
 
     @ManyToOne
-    public Deposito deposito;
+    public Deposito deposito = new Deposito();
 
     @ManyToOne
-    public Voo voo;
+    public Voo voo = new Voo();
 
+    public Entrega(List<Pedido> pedidos, Drone drone, Deposito deposito, Voo voo) {
+        this.pedidos = pedidos;
+        this.drone = drone;
+        this.deposito = deposito;
+        this.voo = voo;
+    }
+
+    public Entrega() {
+
+    }
 
     public double getPesoTotal() {
         double pesoTotal = 0;
