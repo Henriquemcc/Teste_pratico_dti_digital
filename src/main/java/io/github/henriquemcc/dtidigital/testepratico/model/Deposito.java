@@ -8,5 +8,5 @@ public class Deposito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     @Embedded
-    public Coordenada localizacao;
+    public Coordenada localizacao = new Coordenada();
 }
