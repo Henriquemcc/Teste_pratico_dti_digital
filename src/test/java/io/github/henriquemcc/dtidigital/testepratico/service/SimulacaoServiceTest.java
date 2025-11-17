@@ -86,6 +86,14 @@ public class SimulacaoServiceTest {
         assertEquals(entregas.size(), 1);
     }
 
+    @Test
+    public void devePriorizarEntregasDeAltaPrioridade() {
+        redirecionarChamadasRepositories(depositos, pedidos, drones);
+        simulacaoService.executarSimulacao();
+        assertEquals(entregas.getFirst().pedidos.getFirst().prioridade, Prioridade.ALTA);
+        assertEquals(entregas.getLast().pedidos.getLast().prioridade, Prioridade.BAIXA);
+    }
+
     private void redirecionarChamadasRepositories(List<Deposito> depositos, List<Pedido> pedidos, List<Drone> drones) {
         when(depositoRepository.findAll()).thenReturn(depositos);
         when(pedidoRepository.findByEntregueFalseOrderByPrioridadeDescPesoDesc()).thenReturn(pedidos);
