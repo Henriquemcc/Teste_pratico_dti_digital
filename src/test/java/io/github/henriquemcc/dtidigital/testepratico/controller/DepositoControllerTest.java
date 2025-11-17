@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -38,6 +39,15 @@ class DepositoControllerTest extends DatabaseContainerConfiguration {
     void deveRetornar200QuandoRealizadoUmaRequisicaoGet() {
         try {
             mockMvc.perform(get(RECURSO)).andExpect(status().is2xxSuccessful());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void deveRetornar200QuandoRealizarUmaRequisicaoPost() {
+        try{
+            mockMvc.perform(post(RECURSO).contentType(MediaType.APPLICATION_JSON).content("{\"nome\":\"Depósito 1\", \"localizacao\":{\"x\":0, \"y\":0}}")).andExpect(status().is2xxSuccessful());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
