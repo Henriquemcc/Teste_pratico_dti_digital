@@ -36,7 +36,7 @@ public class Entrega {
 
     public double getPesoTotal() {
         double pesoTotal = 0;
-        if (pedidos != null) for (Pedido pedido: pedidos) {
+        if (pedidos != null) for (Pedido pedido : pedidos) {
             pesoTotal += pedido.peso;
         }
         return pesoTotal;

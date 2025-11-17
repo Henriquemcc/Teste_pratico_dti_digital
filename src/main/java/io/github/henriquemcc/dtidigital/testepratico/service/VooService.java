@@ -9,8 +9,8 @@ import java.util.List;
 
 @Service
 public class VooService {
-    private VooRepository vooRepository;
     private final String notFoundMessage = "Voo não encontrado";
+    private VooRepository vooRepository;
 
     public VooService(VooRepository vooRepository) {
         this.vooRepository = vooRepository;

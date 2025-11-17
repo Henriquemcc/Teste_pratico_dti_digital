@@ -46,7 +46,7 @@ class DepositoControllerTest extends DatabaseContainerConfiguration {
 
     @Test
     void deveRetornar200QuandoRealizarUmaRequisicaoPost() {
-        try{
+        try {
             mockMvc.perform(post(RECURSO).contentType(MediaType.APPLICATION_JSON).content("{\"nome\":\"Depósito 1\", \"localizacao\":{\"x\":0, \"y\":0}}")).andExpect(status().is2xxSuccessful());
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -10,15 +10,15 @@ public abstract class DatabaseContainerConfiguration {
             .withUsername("dtidigital")
             .withPassword("password");
 
+    static {
+        mysqlContainer.start();
+    }
+
     @DynamicPropertySource
     public static void properties(DynamicPropertyRegistry registry) {
         registry.add("spring.datasource.url", mysqlContainer::getJdbcUrl);
         registry.add("spring.datasource.password", mysqlContainer::getPassword);
         registry.add("spring.datasource.username", mysqlContainer::getUsername);
         registry.add("spring.datasource.driverClassName", mysqlContainer::getDriverClassName);
-    }
-
-    static {
-        mysqlContainer.start();
     }
 }

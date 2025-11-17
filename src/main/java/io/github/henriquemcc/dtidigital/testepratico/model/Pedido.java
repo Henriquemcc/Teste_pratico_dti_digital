@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 public class Pedido {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     public String nome;
     public float valor;

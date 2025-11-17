@@ -12,7 +12,7 @@ public class RotaService {
     private final RotaRepository rotaRepository;
     private final String notFoundMessage = "Rota não encontrada";
 
-    public RotaService(RotaRepository rotaRepository){
+    public RotaService(RotaRepository rotaRepository) {
         this.rotaRepository = rotaRepository;
     }
 

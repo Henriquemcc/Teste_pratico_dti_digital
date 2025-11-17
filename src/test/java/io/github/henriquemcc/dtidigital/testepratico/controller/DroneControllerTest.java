@@ -44,7 +44,7 @@ public class DroneControllerTest extends DatabaseContainerConfiguration {
 
     @Test
     void deveRetornar200QuandoRealizarUmaRequisicaoPost() {
-        try{
+        try {
             mockMvc.perform(post(RECURSO).contentType(MediaType.APPLICATION_JSON).content("{\"marca\":\"Drone INC\", \"modelo\": \"CargoWing Vortex 300\", \"numeroSerie\": \"1234567890\", \"distanciaPorCarga\": 20, \"capacidade\": 100}")).andExpect(status().is2xxSuccessful());
         } catch (Exception e) {
             throw new RuntimeException(e);

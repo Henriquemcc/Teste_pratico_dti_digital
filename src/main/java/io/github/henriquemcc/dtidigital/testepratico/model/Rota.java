@@ -4,20 +4,21 @@ import jakarta.persistence.*;
 
 @Entity
 public class Rota {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name="x", column = @Column(name = "origem_x")),
-            @AttributeOverride(name="y", column = @Column(name = "origem_y"))
+            @AttributeOverride(name = "x", column = @Column(name = "origem_x")),
+            @AttributeOverride(name = "y", column = @Column(name = "origem_y"))
     })
     public Coordenada origem = new Coordenada();
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride(name="x", column = @Column(name = "destino_x")),
-            @AttributeOverride(name="y", column = @Column(name = "destino_y"))
+            @AttributeOverride(name = "x", column = @Column(name = "destino_x")),
+            @AttributeOverride(name = "y", column = @Column(name = "destino_y"))
     })
     public Coordenada destino = new Coordenada();
 

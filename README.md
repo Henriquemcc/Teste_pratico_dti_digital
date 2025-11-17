@@ -44,7 +44,8 @@ gradlew bootRun
 
 ## Como executar os testes de unidades
 
-Para executar os testes de unidades, na pasta do projeto abra um terminal (ou prompt de comando) e digite o seguinte comando:
+Para executar os testes de unidades, na pasta do projeto abra um terminal (ou prompt de comando) e digite o seguinte
+comando:
 
 No Terminal do Linux e Mac, ou no PowerShell do Windows:
 
@@ -64,13 +65,15 @@ Para testar este programa, realize os seguintes passos:
 
 ### 1. Importe a coleção de requisições do Postman
 
-Com o [Postman](https://www.postman.com/downloads/) instalado em sua máquina, importe a coleção [postman_collection.json](postman_collection.json).
+Com o [Postman](https://www.postman.com/downloads/) instalado em sua máquina, importe a
+coleção [postman_collection.json](postman_collection.json).
 
 ![Captura de tela do Postman com a coleção ´Postman Collection chamada 'DTI Digital', mostrando as pastas 'Pedidos', 'Drones' 'Voos', 'Rotas', 'Depósito', 'Simulação' e 'Entrega'´](docs/Screenshots/000.png).
 
 ### 2. Com o programa em execução, popule o banco de dados com os seguintes elementos: Pedidos, Drones, Depósito.
 
-Na pasta 'Pedidos', execute as requisições 'POST Pedido 1', 'POST Pedido 2', 'POST Pedido 3', 'POST Pedido 4' e 'POST Pedido 5'.
+Na pasta 'Pedidos', execute as requisições 'POST Pedido 1', 'POST Pedido 2', 'POST Pedido 3', 'POST Pedido 4' e 'POST
+Pedido 5'.
 
 Na pasta 'Drones', execute as requisições 'POST Drone 1', 'POST Drone 2' e 'POST Drone 3'.
 

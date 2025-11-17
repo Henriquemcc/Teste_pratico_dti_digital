@@ -9,18 +9,18 @@ import java.util.List;
 
 @Service
 public class PedidoService {
-    private PedidoRepository pedidoRepository;
     private final String notFoundMessage = "Pedido não encontrado";
+    private PedidoRepository pedidoRepository;
 
-    public PedidoService(PedidoRepository pedidoRepository){
+    public PedidoService(PedidoRepository pedidoRepository) {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public List<Pedido> listar(){
+    public List<Pedido> listar() {
         return pedidoRepository.findAll();
     }
 
-    public Pedido buscarPorId(long id){
+    public Pedido buscarPorId(long id) {
         return pedidoRepository.findById(id).orElseThrow(() -> new NotFoundException(notFoundMessage));
     }
 

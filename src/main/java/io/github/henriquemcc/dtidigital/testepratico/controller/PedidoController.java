@@ -11,7 +11,7 @@ import java.util.List;
 public class PedidoController {
     private final PedidoService pedidoService;
 
-    public PedidoController(PedidoService pedidoService){
+    public PedidoController(PedidoService pedidoService) {
         this.pedidoService = pedidoService;
     }
 
@@ -21,7 +21,7 @@ public class PedidoController {
     }
 
     @PostMapping
-    public Pedido cadastrar(@RequestBody Pedido pedido){
+    public Pedido cadastrar(@RequestBody Pedido pedido) {
         return pedidoService.cadastrar(pedido);
     }
 

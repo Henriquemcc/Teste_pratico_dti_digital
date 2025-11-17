@@ -16,12 +16,12 @@ public class DroneController {
     }
 
     @GetMapping
-    public List<Drone> listar(){
+    public List<Drone> listar() {
         return droneService.listar();
     }
 
     @GetMapping("/{id}")
-    public Drone buscarPorId(@PathVariable long id){
+    public Drone buscarPorId(@PathVariable long id) {
         return droneService.buscarPorId(id);
     }
 
@@ -36,7 +36,7 @@ public class DroneController {
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable long id){
+    public void deletar(@PathVariable long id) {
         droneService.deletar(id);
     }
 }

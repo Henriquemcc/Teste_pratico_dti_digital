@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class SimulacaoServiceTest {
-    private List<Deposito> depositos = List.of(new Deposito("Depósito", new Coordenada(0,0)));
+    private List<Deposito> depositos = List.of(new Deposito("Depósito", new Coordenada(0, 0)));
     private List<Pedido> pedidos = List.of(
             new Pedido("Fone de Ouvido", 145.78f, "Descrição detalhada de Fone de Ouvido", 0.1234f, Prioridade.MEDIA, new Coordenada(12, 187)),
             new Pedido("Smart TV", 3567.50f, "Descrição detalhada de Smart TV", 3.4567f, Prioridade.ALTA, new Coordenada(89, 45)),

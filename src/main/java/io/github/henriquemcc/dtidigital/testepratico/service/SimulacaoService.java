@@ -60,11 +60,10 @@ public class SimulacaoService {
 
 
         // Calculando rotas para o voo
-        for (Entrega entrega: entregas)
-        {
+        for (Entrega entrega : entregas) {
             ArrayList<Rota> rotas = new ArrayList<>();
             Coordenada anterior = deposito.localizacao;
-            for (Pedido pedido: entrega.pedidos) {
+            for (Pedido pedido : entrega.pedidos) {
                 Rota rota = new Rota();
                 rota.origem = anterior;
                 rota.destino = pedido.destino;
@@ -106,13 +105,12 @@ public class SimulacaoService {
         // Criando lista de entregas
         ArrayList<Entrega> entregas = new ArrayList<>();
 
-        while (!listaOrdenada.isEmpty())
-        {
+        while (!listaOrdenada.isEmpty()) {
             Pedido pedido = listaOrdenada.removeFirst();
             boolean pedidoAlocado = false;
 
             // tentando colocar o pedido em entregas existentes, mantendo a ordem de prioridade
-            for (Entrega entrega: entregas) {
+            for (Entrega entrega : entregas) {
                 // Verificando se o drone cabe o peso
                 boolean droneCabePeso = entrega.getPesoTotal() + pedido.peso <= entrega.drone.capacidade;
 
@@ -133,7 +131,7 @@ public class SimulacaoService {
                 nova.deposito = deposito;
 
                 // Escolhendo drone com suporte ao peso e ao alcance
-                for (Drone d: drones) {
+                for (Drone d : drones) {
 
                     // Verificando se o drone cabe o peso
                     boolean droneCabePeso = d.capacidade >= pedido.peso;
